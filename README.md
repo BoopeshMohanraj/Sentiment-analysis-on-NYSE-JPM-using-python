@@ -17,12 +17,19 @@ Through this project, we explore whether news sentiment can serve as an indicato
 
 # Libraries & Packages Used
 Python Libraries:
+
 Data Processing: pandas, numpy
+
 Web Scraping: requests, BeautifulSoup
+
 Natural Language Processing (NLP): nltk
+
 Sentiment Analysis: vaderSentiment
+
 Visualization: matplotlib, matplotlib.dates
+
 Financial Data Retrieval: yfinance
+
 Datetime Handling: datetime
 
 # Methodology
