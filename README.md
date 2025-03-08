@@ -15,6 +15,16 @@ Stock markets are influenced by a variety of factors, including economic indicat
 
 Through this project, we explore whether news sentiment can serve as an indicator for stock price movement and help traders make informed decisions.
 
+# Libraries & Packages Used
+Python Libraries:
+Data Processing: pandas, numpy
+Web Scraping: requests, BeautifulSoup
+Natural Language Processing (NLP): nltk
+Sentiment Analysis: vaderSentiment
+Visualization: matplotlib, matplotlib.dates
+Financial Data Retrieval: yfinance
+Datetime Handling: datetime
+
 # Methodology
 To conduct this analysis, we followed these key steps:
 
