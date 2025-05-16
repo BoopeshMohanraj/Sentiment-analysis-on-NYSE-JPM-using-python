@@ -63,10 +63,6 @@ Sentiment Trends: Overlaid aggregated sentiment scores using color-coded bars (g
 
 Comparison: Analyzed if stock price trends aligned with sentiment shifts.
 
-#  Results & Key Insights
-
-![image](https://github.com/user-attachments/assets/3bec1415-7841-4014-95e9-45b6f3b8d91d)
-
 #  Observations
 1. Positive sentiment days generally showed an upward movement in stock prices.
 2. Negative sentiment days coincided with price dips, though not always immediately.
