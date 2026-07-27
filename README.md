@@ -1,4 +1,4 @@
-# News Sentiment vs. Price — JPMorgan (JPM)
+# News Sentiment vs. Price - JPMorgan (JPM)
 
 A compact exploration of whether daily news-headline sentiment tracks short-term price movement in a single large-cap bank stock. Headlines are scraped, scored with VADER, aggregated to a daily sentiment series, and plotted against JPMorgan's daily close.
 
