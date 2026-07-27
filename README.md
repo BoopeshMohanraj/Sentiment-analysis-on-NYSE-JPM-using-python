@@ -1,116 +1,73 @@
-# Sentimen-analysis-on-NYSE-JPM-using-python
+# News Sentiment vs. Price — JPMorgan (JPM)
 
-# Goal :
-The goal of this project is to analyze the relationship between public news sentiment and stock price movements. By leveraging VADER sentiment analysis, we extract insights from financial news headlines and correlate them with JP Morgan Chase’s (JPM) stock performance to determine if sentiment influences stock trends.
+A compact exploration of whether daily news-headline sentiment tracks short-term price movement in a single large-cap bank stock. Headlines are scraped, scored with VADER, aggregated to a daily sentiment series, and plotted against JPMorgan's daily close.
 
-# Introduction : 
-Stock markets are influenced by a variety of factors, including economic indicators, investor sentiment, and breaking news. Financial headlines shape market perception and can lead to price fluctuations.
+> **Scope note:** This is an exploratory study, not a predictive model. It visualizes the relationship between sentiment and price over a short window; it does **not** establish a statistical link, and no trading signal is implied.
 
-# This project aims to:
-1. Scrape financial news headlines from Finviz for JPMorgan Chase.
-2. Perform sentiment analysis using VADER (Valence Aware Dictionary and sEntiment Reasoner).
-3. Obtain historical stock data from Yahoo Finance (yfinance).
-4. Correlate stock price movements with aggregated sentiment scores.
-5. Visualize findings using Matplotlib & Plotly, displaying sentiment vs. stock price trends.
+---
 
-Through this project, we explore whether news sentiment can serve as an indicator for stock price movement and help traders make informed decisions.
+## What it does
 
-# Libraries & Packages Used
-Python Libraries:
+- Scrapes recent JPM news headlines from Finviz
+- Cleans and tokenizes headline text (NLTK) and scores each headline with **VADER** (compound score, −1 to +1)
+- Aggregates headline scores into a **daily mean sentiment** series
+- Pulls JPM daily OHLCV via `yfinance`
+- Merges price and sentiment on date and produces two visuals:
+  - Distribution of headline-level sentiment scores
+  - Dual-axis chart: JPM close price vs. daily aggregated sentiment (Feb 2025)
 
-Data Processing: pandas, numpy
+---
 
-Web Scraping: requests, BeautifulSoup
+## Example output
 
-Natural Language Processing (NLP): nltk
+![JPM close price vs. daily aggregated news sentiment, February 2025](figures/price_vs_sentiment.png)
 
-Sentiment Analysis: vaderSentiment
+*JPM daily close (line) against daily mean headline sentiment (bars), Feb 2025. Illustrative only — the window is too short and no statistical relationship was tested.*
 
-Visualization: matplotlib, matplotlib.dates
+---
 
-Financial Data Retrieval: yfinance
+## Key methods
 
-Datetime Handling: datetime
+| Component | Approach |
+| --- | --- |
+| Headline source | Finviz quote page, parsed with BeautifulSoup |
+| Sentiment engine | VADER (`vaderSentiment`) compound score |
+| Text preprocessing | NLTK tokenization + English stopword removal |
+| Price data | `yfinance` daily bars |
+| Aggregation | Mean headline sentiment per calendar day |
+| Visualization | matplotlib (histogram + dual-axis time series) |
 
-# Methodology
-To conduct this analysis, we followed these key steps:
+---
 
-# 1️⃣ Data Collection
-Stock Data: Extracted daily stock prices for JPMorgan Chase (JPM) using Yahoo Finance (yfinance).
+## Tech stack
 
-News Data: Scraped financial news headlines from Finviz, a widely used market research tool.
+| Layer | Tools |
+| --- | --- |
+| Language | Python 3 |
+| Data | yfinance, requests, BeautifulSoup |
+| NLP | vaderSentiment, NLTK |
+| Plotting | matplotlib |
 
-# 2️⃣ Sentiment Analysis
-Preprocessing: Cleaned and tokenized news headlines, removing stopwords and irrelevant characters.
+---
 
-Sentiment Scoring: Used VADER (Valence Aware Dictionary and sEntiment Reasoner) to assign each headline a sentiment score.
+## Data & limitations
 
-Positive sentiment → Score > 0
-Negative sentiment → Score < 0
-Neutral sentiment → Score ≈ 0
+This project is deliberately small and has real constraints worth stating plainly:
 
-# 3️⃣ Data Integration & Analysis
-Aggregated daily sentiment scores by averaging all headlines for each day.
+- **Short window.** The overlapping price-and-sentiment sample is roughly two weeks of trading days (February 2025). That is far too little data to support any claim about a relationship between sentiment and returns.
+- **Generic sentiment lexicon.** VADER is a general-purpose social-media lexicon, not tuned for financial language. Finance-specific dictionaries (e.g. Loughran-McDonald) would classify terms like "liability" or "volatile" more appropriately.
+- **No statistical test.** The output is a visual comparison only. No correlation, regression, or lead-lag analysis was performed, so no relationship is established.
+- **Fragile scraping.** Finviz page structure can change and rate-limit; the scraper may need adjustment to re-run.
+- **Single name.** One ticker over one month is a demonstration of method, not a generalizable result.
 
-Merged sentiment data with stock price data to ensure alignment.
+A natural next step would be a longer multi-name sample, a finance-tuned sentiment model, and a formal lead-lag or event-study test.
 
-Performed correlation analysis to understand the relationship between sentiment and stock trends.
+---
 
-# 4️⃣ Visualization
-Stock Price Trends: Plotted daily closing prices of JPM stock.
+## How to run
 
-Sentiment Trends: Overlaid aggregated sentiment scores using color-coded bars (green for positive, red for negative).
+1. Open the notebook in Google Colab (or Jupyter).
+2. Run the first cell to install dependencies (`yfinance`, `vaderSentiment`, `nltk`, `beautifulsoup4`, etc.).
+3. Run cells top to bottom. The notebook downloads NLTK data, scrapes headlines, scores sentiment, and renders the charts inline.
 
-Comparison: Analyzed if stock price trends aligned with sentiment shifts.
-
-#  Observations
-1. Positive sentiment days generally showed an upward movement in stock prices.
-2. Negative sentiment days coincided with price dips, though not always immediately.
-3. Neutral sentiment days did not significantly impact price movements.
-
-#  Stock vs. Sentiment Visualization
-The final output graph presents:
-1. JP Morgan Chase’s stock price (blue line).
-2. Aggregated sentiment scores (green for positive, red for negative).
-3. A clear timeline showing price movements vs. sentiment changes.
-
-# Socialization & Distribution
-This project is relevant to financial analysts, traders, and fintech professionals.
-
-# Value & Business Impact
-This project demonstrates how news sentiment can be leveraged for financial decision-making:
-
-1. Data-Driven Investment Strategies: Helps traders understand how public sentiment impacts stock trends.
-
-2. Automated Sentiment Monitoring: Enables AI-driven market sentiment tracking for traders & analysts.
-
-3. Cross-Asset Class Expansion: This method can be applied to crypto, commodities, and ETFs.
-
-# Potential Use Cases:
-
-1. Investment Firms: Enhancing stock research with sentiment tracking.
-2. Retail Traders: Identifying news-driven trading signals.
-3. Risk Management Teams: Measuring sentiment shifts that impact portfolio performance.
-
-# Next Steps & Future Improvements
-1. Expand Data Sources: Integrate alternative sources like Twitter, Bloomberg, and Reddit for broader market sentiment.
-2. Include Economic Indicators: Combine sentiment with macroeconomic data (GDP, inflation, interest rates) to refine predictions.
-3. Apply Machine Learning Models: Explore LSTM (Long Short-Term Memory) models to predict stock movements based on historical sentiment trends.
-4. Multi-Stock Analysis: Extend this methodology to compare sentiment across multiple financial stocks.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+No API keys are required.
