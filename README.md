@@ -20,7 +20,7 @@ A compact exploration of whether daily news-headline sentiment tracks short-term
 
 ## Example output
 
-![JPM close price vs. daily aggregated news sentiment, February 2025](figures/price_vs_sentiment.png)
+![JPM close price vs. daily aggregated news sentiment, February 2025](Figures/price_vs_sentiment.png)
 
 *JPM daily close (line) against daily mean headline sentiment (bars), Feb 2025. Illustrative only — the window is too short and no statistical relationship was tested.*
 
